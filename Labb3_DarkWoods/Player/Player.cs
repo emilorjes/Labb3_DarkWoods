@@ -41,5 +41,52 @@ namespace Labb3_DarkWoods.Player
             this.Toughness = toughness;
             this.Dmg = dmg;
         }
+
+        public static Player playerOne = new Player(" ", " ", 1,default,100,default,default,default,default,default);
+
+        public static void PrintPlayerInfo(Player playerOne)
+        {
+            Console.Write("Name: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(playerOne.Name);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nLevel: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(playerOne.Level);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nHP: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($" / ");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nEXP: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{playerOne.Exp} / {playerOne.expLevelUp}");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nGold: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(playerOne.Gold);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nStrength: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(playerOne.Strenght);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nToughness: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(playerOne.Toughness);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.Write("\nWepon name: ");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(playerOne.WeponName);
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.ReadLine();
+        }
     }
 }
