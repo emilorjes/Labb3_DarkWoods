@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labb3_DarkWoods", "Labb3_DarkWoods\Labb3_DarkWoods.csproj", "{CBDD487E-1FA6-476A-A465-9DD4551041DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CBDD487E-1FA6-476A-A465-9DD4551041DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDD487E-1FA6-476A-A465-9DD4551041DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDD487E-1FA6-476A-A465-9DD4551041DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDD487E-1FA6-476A-A465-9DD4551041DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4523319B-B020-4752-BEF6-8A359E1EC939}
+	EndGlobalSection
+EndGlobal
