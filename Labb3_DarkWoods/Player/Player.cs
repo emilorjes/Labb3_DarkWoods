@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Labb3_DarkWoods.Player
@@ -16,6 +17,7 @@ namespace Labb3_DarkWoods.Player
         private int strenght;
         private int toughness;
         private int dmg;
+        private int fixedHp;
 
         public string Name { get => name; set => name = value; }
         public string WeponName { get => weponName; set => weponName = value; }
@@ -27,8 +29,9 @@ namespace Labb3_DarkWoods.Player
         public int Strenght { get => strenght; set => strenght = value; }
         public int Toughness { get => toughness; set => toughness = value; }
         public int Dmg { get => dmg; set => dmg = value; }
+        public int FixedHp { get => fixedHp; set => fixedHp = value; }
 
-        public Player(string name, string weponName, int level, int exp, int expLevelUp, int hp, int gold, int strenght, int toughness, int dmg)
+        public Player(string name, string weponName, int level, int exp, int expLevelUp, int hp, int gold, int strenght, int toughness, int dmg, int fixedHp)
         {
             this.Name = name;
             this.WeponName = weponName;
@@ -40,9 +43,10 @@ namespace Labb3_DarkWoods.Player
             this.Strenght = strenght;
             this.Toughness = toughness;
             this.Dmg = dmg;
+            this.fixedHp = fixedHp;
         }
 
-        public static Player playerOne = new Player(" ", " ", 1,default,100,default,default,default,default,default);
+        public static Player playerOne = new Player(" ", " ", 1, default, 100, 100, default, default, default, default, 100);
 
         public static void PrintPlayerInfo(Player playerOne)
         {
@@ -59,7 +63,7 @@ namespace Labb3_DarkWoods.Player
 
             Console.Write("\nHP: ");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($" / ");
+            Console.WriteLine($" {playerOne.Hp + playerOne.toughness} / {playerOne.FixedHp + playerOne.toughness} ");
             Console.ForegroundColor = ConsoleColor.White;
 
             Console.Write("\nEXP: ");

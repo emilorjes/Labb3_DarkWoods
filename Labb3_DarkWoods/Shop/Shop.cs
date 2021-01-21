@@ -37,9 +37,10 @@ namespace Labb3_DarkWoods.Shop
             
             bool keepMenuGo = true;
 
-            Console.WriteLine("Welcom to The Cabin Store, what can i help you with traveller?\n");
+          
             do
             {
+                Console.WriteLine("Welcom to The Cabin Store, what can i help you with traveller?\n");
                 Console.WriteLine($"Current Gold ammount: {playerOne.Gold} \n");
                 Console.WriteLine($"1.  Buy Strenght Amulette: {cabinShop.StrenghtPrice} Gold.");
                 Console.WriteLine($"2.  Buy Toughness Amulette: {cabinShop.ToughnessPrice} Gold.");
@@ -105,7 +106,7 @@ namespace Labb3_DarkWoods.Shop
 
         private static void NotEnoughMoney()
         {
-            Console.WriteLine("\nYou don't have enough gold to buy this item. Kill more monsters to earn more gold.");
+            Tools.RedTextWr("\nYou don't have enough gold to buy this item. Kill more monsters to earn more gold.");
             Console.WriteLine($"Current Gold: {playerOne.Gold}");
         }
     }

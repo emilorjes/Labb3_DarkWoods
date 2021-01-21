@@ -8,9 +8,7 @@ namespace Labb3_DarkWoods.Utility
     {
         public static void ErrorMessage()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Wrong input, try again...");
-            Console.ForegroundColor = ConsoleColor.White;
+            Tools.RedTextWr("Wrong input, try again...");
             Console.ReadLine();
         }
         public static void FiveChoiceMenuHandling(string menuChoiceString)

@@ -18,7 +18,7 @@ namespace Labb3_DarkWoods.Game
         {CreekJumper.creekJumper, DeathRunner.deathRunner, EarthCrawler.earthCrawler, SwampDemon.swampDemon, TreeDropper.treeDropper};
         public static List<Player.Player> playerList = new List<Player.Player> {playerOne};
         public static Random rand = new Random();
-
+        
 
 
         //===================================================================================================================================================================================
@@ -154,7 +154,6 @@ namespace Labb3_DarkWoods.Game
                         break;
                     case "2":
                         keepMenuGo = false;
-                        PlayerMOnsterFUllHp(listOfMOnsters[randomMonster]);
                         break;
 
                 }
@@ -188,7 +187,7 @@ namespace Labb3_DarkWoods.Game
             {
                 int randomPlayerDmg = rand.Next(1, 50);
                 playerOne.Dmg = randomPlayerDmg;
-                int randomMonsterDmg = rand.Next(1, 25);
+                int randomMonsterDmg = rand.Next(1, 40);
                 monster.AtkDmg = randomMonsterDmg;
                 int randomMonsterGoldDrop = rand.Next(0, 100);
                 monster.GoldDrop = randomMonsterGoldDrop;
@@ -205,7 +204,7 @@ namespace Labb3_DarkWoods.Game
                 Console.WriteLine($"The {monster.Name} life is {monster.Hp} / {monster.MaxHp}.\n");
                 Console.WriteLine($"The {monster.Name} attack you with {monster.AtkName} and deal {monster.AtkDmg}.");
                 playerOne.Hp = playerOne.Hp - monster.AtkDmg;
-                Console.WriteLine($"Your life is {playerOne.Hp} / {playerOne.Toughness + 100} \n");
+                Console.WriteLine($"Your life is {playerOne.Hp + playerOne.Toughness} / {playerOne.FixedHp + playerOne.Toughness} \n");
                 Console.WriteLine("Press ENTER to hit again!");
                 Console.ReadLine();
 
@@ -250,7 +249,7 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void PlayerMOnsterFUllHp(Monster.Monster monster)
         {
-            playerOne.Hp = 100 + playerOne.Toughness;
+            playerOne.Hp = 100;
             monster.Hp = monster.MaxHp;
         }
 
@@ -293,6 +292,7 @@ namespace Labb3_DarkWoods.Game
             Console.Write("The Darkwoods awiats you......\n\n\n");
             Environment.Exit(0);
         }
+        
     }
   
 }
