@@ -46,6 +46,7 @@ namespace Labb3_DarkWoods.Player
 
         public static void PrintPlayerInfo(Player playerOne)
         {
+            
             Console.Write("Name: ");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(playerOne.Name);
