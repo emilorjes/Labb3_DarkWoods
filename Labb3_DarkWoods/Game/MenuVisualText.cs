@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labb3_DarkWoods.Utility;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static Labb3_DarkWoods.Player.Player;
@@ -28,9 +29,15 @@ namespace Labb3_DarkWoods.Game
         public static void CabinShopMenuText()
         {
             Console.WriteLine("Welcom to The Cabin Store, what can i help you with traveller?\n");
-            Console.WriteLine($"Current Gold ammount: {playerOne.Gold} \n");
-            Console.WriteLine($"1.  Buy Strenght Amulette: {cabinShop.StrenghtPrice} Gold.");
-            Console.WriteLine($"2.  Buy Toughness Amulette: {cabinShop.ToughnessPrice} Gold.");
+            Console.Write($"Current Gold ammount: ");
+            Tools.YellowTextWr($"{playerOne.Gold} \n");
+
+            Console.Write($"1.  Buy Strenght Amulette: ");
+            Tools.YellowTextWr($"{cabinShop.StrenghtPrice} Gold.");
+
+            Console.Write($"2.  Buy Toughness Amulette: ");
+            Tools.YellowTextWr($"{cabinShop.ToughnessPrice} Gold.");
+            
             Console.WriteLine($"3.  Leave the shop \n");
             Console.Write("Your choice: ");
         }

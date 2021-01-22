@@ -86,7 +86,7 @@ namespace Labb3_DarkWoods.Shop
                 playerOne.Strenght += cabinShop.AddStrenght;
                 playerOne.Gold -= cabinShop.StrenghtPrice;
                 
-                Console.WriteLine($"\nYou added {cabinShop.AddStrenght} points to your Toughness! Your toughness is now {playerOne.Strenght}. ");
+                Tools.GreenTextWr($"\nYou added {cabinShop.AddStrenght} points to your Toughness! Your toughness is now {playerOne.Strenght}. ");
             }
             Console.ReadLine();
         }
@@ -110,7 +110,7 @@ namespace Labb3_DarkWoods.Shop
                 playerOne.Toughness += cabinShop.AddToughness;
                 playerOne.Gold -= cabinShop.ToughnessPrice;
 
-                Console.WriteLine($"\nYou added {cabinShop.AddToughness} points to your Toughness! Your toughness is now {playerOne.Toughness}. ");
+                Tools.GreenTextWr($"\nYou added {cabinShop.AddToughness} points to your Toughness! Your toughness is now {playerOne.Toughness}. ");
             }
             Console.ReadLine();
         }
@@ -126,7 +126,8 @@ namespace Labb3_DarkWoods.Shop
         private static void NotEnoughMoney()
         {
             Tools.RedTextWr("\nYou don't have enough gold to buy this item. Kill more monsters to earn more gold.");
-            Console.WriteLine($"Current Gold: {playerOne.Gold}");
+            Console.Write($"Current Gold: ");
+            Tools.YellowTextWr($"{playerOne.Gold}");
         }
         //===================================================================================================================================================================================
     }

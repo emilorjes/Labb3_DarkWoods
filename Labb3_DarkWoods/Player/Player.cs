@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labb3_DarkWoods.Utility;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -52,45 +53,29 @@ namespace Labb3_DarkWoods.Player
         {
             
             Console.Write("Name: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(playerOne.Name);
-            Console.ForegroundColor = ConsoleColor.White;
-
+            Tools.GreenTextWr($"{playerOne.Name}");
+         
             Console.Write("\nLevel: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(playerOne.Level);
-            Console.ForegroundColor = ConsoleColor.White;
-
+            Tools.GreenTextWr($"{playerOne.Level}");
+           
             Console.Write("\nHP: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($" {playerOne.Hp + playerOne.toughness} / {playerOne.FixedHp + playerOne.toughness} ");
-            Console.ForegroundColor = ConsoleColor.White;
+            Tools.GreenTextWr($" {playerOne.Hp + playerOne.toughness} / {playerOne.FixedHp + playerOne.toughness} ");
 
             Console.Write("\nEXP: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{playerOne.Exp} / {playerOne.expLevelUp}");
-            Console.ForegroundColor = ConsoleColor.White;
-
+            Tools.GreenTextWr($"{playerOne.Exp} / {playerOne.expLevelUp}");
+         
             Console.Write("\nGold: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(playerOne.Gold);
-            Console.ForegroundColor = ConsoleColor.White;
-
+            Tools.GreenTextWr($"{playerOne.Gold}");
+       
             Console.Write("\nStrength: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(playerOne.Strenght);
-            Console.ForegroundColor = ConsoleColor.White;
+            Tools.GreenTextWr($"{playerOne.Strenght}");
 
             Console.Write("\nToughness: ");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(playerOne.Toughness);
-            Console.ForegroundColor = ConsoleColor.White;
-
+            Tools.GreenTextWr($"{playerOne.Toughness}");
+       
             Console.Write("\nWepon name: ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(playerOne.WeponName);
-            Console.ForegroundColor = ConsoleColor.White;
-
+            Tools.GreenTextWr($"{playerOne.WeponName}");
+           
             Console.ReadLine();
         }
     }

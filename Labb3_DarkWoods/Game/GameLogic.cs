@@ -243,67 +243,42 @@ namespace Labb3_DarkWoods.Game
                     break;
                 }
 
-                Console.WriteLine($"You attack the {monster.Name} with your {playerOne.WeponName} and deal {playerOne.Dmg}(+{playerOne.Strenght}) damage.");
-                monster.Hp = monster.Hp - playerOne.Dmg - playerOne.Strenght;
-                
-                if(monster.Hp > 0)
-                {
-                    Console.WriteLine($"The {monster.Name} life is {monster.Hp} / {monster.MaxHp}.\n");
-                }
-                else if (monster.Hp <= 0)
-                {
-                    Console.WriteLine($"The {monster.Name} life is 0 / {monster.MaxHp}.\n");
-                }
-               
-               
-                Console.WriteLine($"The {monster.Name} attack you with {monster.AtkName} and deal {monster.AtkDmg}.");
-                playerOne.Hp -= monster.AtkDmg;
-               
-                if (playerOne.Hp > 0)
-                {
-                    Console.WriteLine($"Your life is {playerOne.Hp + playerOne.Toughness} / {playerOne.FixedHp + playerOne.Toughness} \n");
-                }
-                else if(playerOne.Hp <= 0)
-                {
-                    Console.WriteLine($"Your life is 0 / {playerOne.FixedHp + playerOne.Toughness} \n");
-                }
+                PlayerBattleDmg(monster);
 
+                MonsterBattleHp(monster);
 
-                if (monster.Hp > 0 && playerOne.Hp > 0)
-                {
-                    Console.WriteLine("Press ENTER to hit again!");
-                }
-                else if (monster.Hp <= 0 && playerOne.Hp > 0)
-                {
-                    Tools.GreenTextWr("You Won The Battle!");
-                }
-                else if(playerOne.Hp <= 0)
-                {
-                    Tools.RedTextWr("YOU DIED");
-                    Console.ReadLine();
-                    Console.Clear();
-                    Tools.Exit();
-                }
-               
+                MonsterBattleDmg(monster);
+
+                PlayerBattleHp();
+
+                BattleHitWonLose(monster);
+
                 Console.ReadLine();
 
                 Console.Clear();
             } while (monster.Hp > 0);
 
-           
+            DefetedMonsterGains(monster);
+        }
 
-            if(monster.Hp <= 0)
+        private static void DefetedMonsterGains(Monster.Monster monster)
+        {
+            if (monster.Hp <= 0)
             {
-                Console.WriteLine($"You defeted the {monster.Name}\n");
-                
-                Console.WriteLine($"\n{monster.Name} dropped {monster.GoldDrop} gold");
+                Console.Write($"You defeted the ");
+                Tools.MagnetaTextWr($"{monster.Name}\n");
+
+                Tools.MagnetaTextW($"\n{monster.Name} ");
+                Console.Write("dropped ");
+                Tools.YellowTextWr($"{monster.GoldDrop} Gold");
                 playerOne.Gold += monster.GoldDrop;
-                Console.WriteLine($"Your gold ammount is: {playerOne.Gold}\n");
-              
+                Console.Write($"Your gold ammount is: ");
+                Tools.YellowTextWr($"{playerOne.Gold}\n");
+
                 playerOne.Exp += monster.Exp;
                 Console.WriteLine($"You gained {monster.Exp} exp.");
-                Console.WriteLine($"Exp: {playerOne.Exp} / {playerOne.ExpLevelUp}");
-                
+                Console.WriteLine($"Exp: {playerOne.Exp} / {playerOne.ExpLevelUp} to next level.");
+
                 if (playerOne.Exp == playerOne.ExpLevelUp)
                 {
                     playerOne.Exp = default;
@@ -316,8 +291,89 @@ namespace Labb3_DarkWoods.Game
                         Tools.Exit();
                     }
                 }
-                
+
                 Console.ReadLine();
+            }
+        }
+
+        private static void BattleHitWonLose(Monster.Monster monster)
+        {
+            if (monster.Hp > 0 && playerOne.Hp > 0)
+            {
+                Console.WriteLine("Press ENTER to hit again!");
+            }
+            else if (monster.Hp <= 0 && playerOne.Hp > 0)
+            {
+                Tools.GreenTextWr("You Won The Battle!");
+            }
+            else if (playerOne.Hp <= 0)
+            {
+                Tools.RedTextWr("YOU DIED");
+                Console.ReadLine();
+                Console.Clear();
+                Tools.Exit();
+            }
+        }
+
+        private static void PlayerBattleHp()
+        {
+            if (playerOne.Hp > 0)
+            {
+                Console.Write($"Your life is ");
+                Tools.RedTextW($"{playerOne.Hp + playerOne.Toughness} ");
+                Console.Write("/");
+                Tools.GreenTextWr($" {playerOne.FixedHp + playerOne.Toughness} \n");
+            }
+            else if (playerOne.Hp <= 0)
+            {
+                Console.Write($"Your life is ");
+                Tools.RedTextW($"0 ");
+                Console.Write("/");
+                Tools.GreenTextWr($" {playerOne.FixedHp + playerOne.Toughness} \n");
+            }
+        }
+
+        private static void MonsterBattleDmg(Monster.Monster monster)
+        {
+            Console.Write($"The ");
+            Tools.MagnetaTextW($"{monster.Name} ");
+            Console.Write("attack you with ");
+            Tools.MagnetaTextW($"{monster.AtkName} ");
+            Console.Write("and deal ");
+            Tools.BlueTextW($"{monster.AtkDmg} ");
+            Console.WriteLine("damage.");
+            playerOne.Hp -= monster.AtkDmg;
+        }
+
+        private static void PlayerBattleDmg(Monster.Monster monster)
+        {
+            Console.Write($"You attack the ");
+            Tools.MagnetaTextW($"{monster.Name} ");
+            Console.Write("with your ");
+            Tools.MagnetaTextW($"{playerOne.WeponName} ");
+            Console.Write("and deal ");
+            Tools.BlueTextW($"{playerOne.Dmg} ");
+            Console.Write("(");
+            Tools.BlueTextW($"+{playerOne.Strenght}");
+            Console.WriteLine(") damage.");
+            monster.Hp = monster.Hp - playerOne.Dmg - playerOne.Strenght;
+        }
+
+        private static void MonsterBattleHp(Monster.Monster monster)
+        {
+            if (monster.Hp > 0)
+            {
+                Console.Write($"The {monster.Name} life is ");
+                Tools.RedTextW($"{monster.Hp} ");
+                Console.Write("/");
+                Tools.GreenTextWr($" {monster.MaxHp}.\n\n");
+            }
+            else if (monster.Hp <= 0)
+            {
+                Console.Write($"The {monster.Name} life is ");
+                Tools.RedTextW($"0 ");
+                Console.Write("/");
+                Tools.GreenTextWr($" {monster.MaxHp}.\n\n");
             }
         }
         //===================================================================================================================================================================================
