@@ -11,13 +11,17 @@ namespace Labb3_DarkWoods.Game
 {
     class GameLogic
     {
+        
         //===================================================================================================================================================================================
-        // GameLogic
+        // Public lista med player och monster. Public random som andvänds för alla random
         //===================================================================================================================================================================================
         public static List<Monster.Monster> listOfMOnsters = new List<Monster.Monster>()
         {CreekJumper.creekJumper, DeathRunner.deathRunner, EarthCrawler.earthCrawler, SwampDemon.swampDemon, TreeDropper.treeDropper};
         public static List<Player.Player> playerList = new List<Player.Player> {playerOne};
         public static Random rand = new Random();
+        //===================================================================================================================================================================================
+        
+
         
 
 
@@ -29,6 +33,9 @@ namespace Labb3_DarkWoods.Game
             GameLogic.GameIntro();
             GameLogic.MainMenu();
         }
+        //===================================================================================================================================================================================
+
+
 
 
 
@@ -37,10 +44,54 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void GameIntro()
         {
-            GameLogo();
+            MenuVisualText.GameLogo();
             StoryVisualText.IntroText();
             ChoosePlayerAndWeponNames();
         }
+        //===================================================================================================================================================================================
+
+
+
+
+
+        //===================================================================================================================================================================================
+        // Skriver ut ett random monster
+        //===================================================================================================================================================================================
+        private static void MonsterAppear(Monster.Monster monster)
+        {
+            Console.WriteLine($"Watch out! An ancient {monster.Name} level {monster.Level} is blocking your way\n");
+        }
+        //===================================================================================================================================================================================
+
+
+
+
+
+        //===================================================================================================================================================================================
+        // Spelaren får välja namn på player och wepon
+        //===================================================================================================================================================================================
+        private static void ChoosePlayerAndWeponNames()
+        {
+            Console.WriteLine("Choose a name for your.... ");
+            Console.Write("Hero:");
+            playerOne.Name = Console.ReadLine();
+            Console.Write("Wepon: ");
+            playerOne.WeponName = Console.ReadLine();
+            Console.Clear();
+
+            
+
+            if (playerOne.Name == "Robin")
+            {
+                playerOne.Level = 9;
+                playerOne.Toughness = 100;
+                playerOne.Strenght = 100;
+                playerOne.Gold = 1000000;
+            }
+        }
+        //===================================================================================================================================================================================
+
+
 
 
 
@@ -52,11 +103,7 @@ namespace Labb3_DarkWoods.Game
             bool keepMenuGo = true;
             do
             {
-                Console.WriteLine("1.  Enter the Darkwoods.....");
-                Console.WriteLine("2.  Show details about your character");
-                Console.WriteLine("3.  Go to shop.");
-                Console.WriteLine("4.  Exit\n");
-                Console.Write("Your coice: ");
+                MenuVisualText.MainMenuText();
                 string menuChoiceString = Console.ReadLine();
                 ErrorHandling.FourChoiceMenuHandling(menuChoiceString);
 
@@ -74,7 +121,7 @@ namespace Labb3_DarkWoods.Game
                         Shop.Shop.ShopCabin();
                         break;
                     case "4":
-                        Exit();
+                        Tools.Exit();
                         break;
                 }
 
@@ -82,6 +129,9 @@ namespace Labb3_DarkWoods.Game
 
             } while (keepMenuGo);
         }
+        //===================================================================================================================================================================================
+
+
 
 
 
@@ -93,15 +143,10 @@ namespace Labb3_DarkWoods.Game
 
             bool keepMenuGo = true;
             string menuChoiceString;
-            Console.WriteLine($"You have entered the Darkwoods {playerOne.Name}............... Stay safe my friend..... \n");
-
-
-
+           
             do
             {
-                Console.WriteLine($"1.  Explore the Darkwoods");
-                Console.WriteLine($"2.  Leave the Darkwoods \n");
-                Console.Write("Your choice: ");
+                MenuVisualText.EnterDarkwoodsMenuText();
                 menuChoiceString = Console.ReadLine();
 
                 ErrorHandling.TwoChoiceMenuHandling(menuChoiceString);
@@ -122,6 +167,9 @@ namespace Labb3_DarkWoods.Game
 
             } while (keepMenuGo);
         }
+        //===================================================================================================================================================================================
+
+
 
 
 
@@ -130,58 +178,56 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void ExploreDarkwoods()
         {
+            int randomFightNoFight = rand.Next(1,12);
             int randomMonster = rand.Next(listOfMOnsters.Count);
-            MonsterAppear(listOfMOnsters[randomMonster]);
-            bool keepMenuGo = true;
+            bool keepMenuGo;
             string menuChoiceString;
-
-            do
+            if(randomFightNoFight <= 8)
             {
-
-                Console.WriteLine($"1.  Attack!");
-                Console.WriteLine($"2.  Flee...... \n");
-                Console.Write("Your choice: ");
-                menuChoiceString = Console.ReadLine();
-
-                ErrorHandling.TwoChoiceMenuHandling(menuChoiceString);
-
-                Console.Clear();
-
-                switch (menuChoiceString)
+                do
                 {
-                    case "1":
-                        AttackMonster(listOfMOnsters[randomMonster]);
-                        break;
-                    case "2":
-                        keepMenuGo = false;
-                        break;
+                    MonsterAppear(listOfMOnsters[randomMonster]);
+                    MenuVisualText.ExploreDarkwoodsMenuText();
+                    menuChoiceString = Console.ReadLine();
 
-                }
-                PlayerMOnsterFUllHp(listOfMOnsters[randomMonster]);
-                break;
+                    ErrorHandling.TwoChoiceMenuHandling(menuChoiceString);
+
+                    Console.Clear();
+
+                    switch (menuChoiceString)
+                    {
+                        case "1":
+                            Battle(listOfMOnsters[randomMonster]);
+                            break;
+                        case "2":
+                            keepMenuGo = false;
+                            break;
+
+                    }
+                    Tools.PlayerMOnsterFUllHp(listOfMOnsters[randomMonster]);
+                    break;
 
 
 
-            } while (keepMenuGo);
+                } while (keepMenuGo);
+            }
+            else
+            {
+                Console.WriteLine("Nothing happens.");
+                Console.ReadLine();
+            }
+            
         }
-
-
-
-
         //===================================================================================================================================================================================
-        // Skriver ut ett random monster
-        //===================================================================================================================================================================================
-        private static void MonsterAppear(Monster.Monster monster)
-        {
-            Console.WriteLine($"Watch out! An ancient {monster.Name} level {monster.Level} is blocking your way\n");
-        }
+
+
 
 
 
         //===================================================================================================================================================================================
         // Battlesystem
         //===================================================================================================================================================================================
-        private static void AttackMonster(Monster.Monster monster)
+        private static void Battle(Monster.Monster monster)
         {
             do
             {
@@ -192,107 +238,106 @@ namespace Labb3_DarkWoods.Game
                 int randomMonsterGoldDrop = rand.Next(0, 100);
                 monster.GoldDrop = randomMonsterGoldDrop;
 
-
-
-                Console.WriteLine($"You attack the {monster.Name} with your {playerOne.WeponName} and deal {playerOne.Dmg}(+{playerOne.Strenght}) damage.");
-                monster.Hp = monster.Hp - playerOne.Dmg - playerOne.Strenght;
-                if (monster.Hp <= 0)
+                if (monster.Hp == 0)
                 {
                     break;
                 }
 
-                Console.WriteLine($"The {monster.Name} life is {monster.Hp} / {monster.MaxHp}.\n");
+                Console.WriteLine($"You attack the {monster.Name} with your {playerOne.WeponName} and deal {playerOne.Dmg}(+{playerOne.Strenght}) damage.");
+                monster.Hp = monster.Hp - playerOne.Dmg - playerOne.Strenght;
+                
+                if(monster.Hp > 0)
+                {
+                    Console.WriteLine($"The {monster.Name} life is {monster.Hp} / {monster.MaxHp}.\n");
+                }
+                else if (monster.Hp <= 0)
+                {
+                    Console.WriteLine($"The {monster.Name} life is 0 / {monster.MaxHp}.\n");
+                }
+               
+               
                 Console.WriteLine($"The {monster.Name} attack you with {monster.AtkName} and deal {monster.AtkDmg}.");
-                playerOne.Hp = playerOne.Hp - monster.AtkDmg;
-                Console.WriteLine($"Your life is {playerOne.Hp + playerOne.Toughness} / {playerOne.FixedHp + playerOne.Toughness} \n");
-                Console.WriteLine("Press ENTER to hit again!");
-                Console.ReadLine();
+                playerOne.Hp -= monster.AtkDmg;
+               
+                if (playerOne.Hp > 0)
+                {
+                    Console.WriteLine($"Your life is {playerOne.Hp + playerOne.Toughness} / {playerOne.FixedHp + playerOne.Toughness} \n");
+                }
+                else if(playerOne.Hp <= 0)
+                {
+                    Console.WriteLine($"Your life is 0 / {playerOne.FixedHp + playerOne.Toughness} \n");
+                }
 
+
+                if (monster.Hp > 0 && playerOne.Hp > 0)
+                {
+                    Console.WriteLine("Press ENTER to hit again!");
+                }
+                else if (monster.Hp <= 0 && playerOne.Hp > 0)
+                {
+                    Tools.GreenTextWr("You Won The Battle!");
+                }
+                else if(playerOne.Hp <= 0)
+                {
+                    Tools.RedTextWr("YOU DIED");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Tools.Exit();
+                }
+               
+                Console.ReadLine();
 
                 Console.Clear();
             } while (monster.Hp > 0);
 
-            if (playerOne.Hp <= 0)
-            {
-                Console.WriteLine("YOU DIED");
-                Exit();
-            }
-            else if (monster.Hp <= 0)
-            {
-                Console.WriteLine($"\nYou defeted the {monster.Name}\n");
+           
 
-                playerOne.Exp = playerOne.Exp + monster.Exp;
+            if(monster.Hp <= 0)
+            {
+                Console.WriteLine($"You defeted the {monster.Name}\n");
+                
+                Console.WriteLine($"\n{monster.Name} dropped {monster.GoldDrop} gold");
+                playerOne.Gold += monster.GoldDrop;
+                Console.WriteLine($"Your gold ammount is: {playerOne.Gold}\n");
+              
+                playerOne.Exp += monster.Exp;
                 Console.WriteLine($"You gained {monster.Exp} exp.");
                 Console.WriteLine($"Exp: {playerOne.Exp} / {playerOne.ExpLevelUp}");
+                
                 if (playerOne.Exp == playerOne.ExpLevelUp)
                 {
                     playerOne.Exp = default;
                     playerOne.Level += 1;
                     playerOne.ExpLevelUp += 100;
                     Console.WriteLine($"\nNice! You are level {playerOne.Level} now.");
+                    if (playerOne.Level == 10)
+                    {
+                        Console.WriteLine("\nYOU WON THE GAME!\n");
+                        Tools.Exit();
+                    }
                 }
-
-                Console.WriteLine($"\n{monster.Name} dropped {monster.GoldDrop} gold");
-                playerOne.Gold = playerOne.Gold + monster.GoldDrop;
-                Console.WriteLine($"Your gold ammount is: {playerOne.Gold}");
+                
                 Console.ReadLine();
-
             }
-
-
         }
-
-
-
         //===================================================================================================================================================================================
-        // Återställer full Hp
-        //===================================================================================================================================================================================
-        private static void PlayerMOnsterFUllHp(Monster.Monster monster)
-        {
-            playerOne.Hp = 100;
-            monster.Hp = monster.MaxHp;
-        }
 
 
 
-        //===================================================================================================================================================================================
-        // En "logo" till spelet
-        //===================================================================================================================================================================================
-        private static void GameLogo()
-        {
-            Console.WriteLine("==================================");
-            Console.WriteLine("     WELCOME TO THE DARKWOODS     ");
-            Console.WriteLine("==================================");
-        }
 
 
 
-        //===================================================================================================================================================================================
-        // Spelaren får välja namn på player och wepon
-        //===================================================================================================================================================================================
-        private static void ChoosePlayerAndWeponNames()
-        {
-            Console.WriteLine("Choose a name for your.... ");
-            Console.Write("Hero:");
-            playerOne.Name = Console.ReadLine();
-            Console.Write("Wepon: ");
-            playerOne.WeponName = Console.ReadLine();
-            Console.Clear();
-
-            Console.WriteLine($"Hello {playerOne.Name}!");
-        }
 
 
 
-        //===================================================================================================================================================================================
-        // Stänger ner spelet
-        //===================================================================================================================================================================================
-        private static void Exit()
-        {
-            Console.Write("The Darkwoods awiats you......\n\n\n");
-            Environment.Exit(0);
-        }
-        
+
+
+
+
+
+
+
+
     }
-  
+
 }

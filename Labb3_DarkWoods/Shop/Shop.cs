@@ -3,7 +3,7 @@ using Labb3_DarkWoods.Utility;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Labb3_DarkWoods.Game;
 
 namespace Labb3_DarkWoods.Shop
 {
@@ -32,25 +32,23 @@ namespace Labb3_DarkWoods.Shop
 
         public static Shop cabinShop = new Shop(5, 5, 50, 50, default);
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // En shop där man kan köpa Strenght och Toughness till sin player
+        //===================================================================================================================================================================================
         public static void ShopCabin()
         {
-            
             bool keepMenuGo = true;
 
-          
             do
             {
-                Console.WriteLine("Welcom to The Cabin Store, what can i help you with traveller?\n");
-                Console.WriteLine($"Current Gold ammount: {playerOne.Gold} \n");
-                Console.WriteLine($"1.  Buy Strenght Amulette: {cabinShop.StrenghtPrice} Gold.");
-                Console.WriteLine($"2.  Buy Toughness Amulette: {cabinShop.ToughnessPrice} Gold.");
-                Console.WriteLine($"3.  Leave the shop \n");
-                Console.Write("Your choice: ");
+                MenuVisualText.CabinShopMenuText();
 
                 string menuChoiceString = Console.ReadLine();
                 ErrorHandling.ThreeChoiceMenuHandling(menuChoiceString);
-
-
 
                 switch (menuChoiceString)
                 {
@@ -68,8 +66,15 @@ namespace Labb3_DarkWoods.Shop
 
             } while (keepMenuGo);
         }
+        //===================================================================================================================================================================================
 
 
+
+
+
+        //===================================================================================================================================================================================
+        // Köper Strenght och lägger till den till player
+        //===================================================================================================================================================================================
         private static void BuyStrenght()
         {
             if (playerOne.Gold < cabinShop.StrenghtPrice || playerOne.Gold <= cabinShop.ZeroGold)
@@ -85,8 +90,15 @@ namespace Labb3_DarkWoods.Shop
             }
             Console.ReadLine();
         }
+        //===================================================================================================================================================================================
 
 
+
+
+
+        //===================================================================================================================================================================================
+        // Köper Toughness och lägger till den till player
+        //===================================================================================================================================================================================
         private static void BuyToughness()
         {
             if (playerOne.Gold < cabinShop.ToughnessPrice || playerOne.Gold <= cabinShop.ZeroGold)
@@ -102,12 +114,20 @@ namespace Labb3_DarkWoods.Shop
             }
             Console.ReadLine();
         }
+        //===================================================================================================================================================================================
 
 
+
+
+
+        //===================================================================================================================================================================================
+        // Skriver ut ett meddelande om player har för lite pengar
+        //===================================================================================================================================================================================
         private static void NotEnoughMoney()
         {
             Tools.RedTextWr("\nYou don't have enough gold to buy this item. Kill more monsters to earn more gold.");
             Console.WriteLine($"Current Gold: {playerOne.Gold}");
         }
+        //===================================================================================================================================================================================
     }
 }
