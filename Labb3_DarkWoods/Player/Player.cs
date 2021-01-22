@@ -68,10 +68,10 @@ namespace Labb3_DarkWoods.Player
             Tools.GreenTextWr($"{playerOne.Gold}");
        
             Console.Write("\nStrength: ");
-            Tools.GreenTextWr($"{playerOne.Strenght}");
+            Tools.GreenTextWr($"+ {playerOne.Strenght}");
 
             Console.Write("\nToughness: ");
-            Tools.GreenTextWr($"{playerOne.Toughness}");
+            Tools.GreenTextWr($"+ {playerOne.Toughness}");
        
             Console.Write("\nWepon name: ");
             Tools.GreenTextWr($"{playerOne.WeponName}");
