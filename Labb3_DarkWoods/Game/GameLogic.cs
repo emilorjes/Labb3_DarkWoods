@@ -19,7 +19,6 @@ namespace Labb3_DarkWoods.Game
         {CreekJumper.creekJumper, DeathRunner.deathRunner, EarthCrawler.earthCrawler, SwampDemon.swampDemon, TreeDropper.treeDropper};
         public static List<Player.Player> playerList = new List<Player.Player> {playerOne};
         public static Random rand = new Random();
-        //===================================================================================================================================================================================
         
 
         
@@ -33,7 +32,6 @@ namespace Labb3_DarkWoods.Game
             GameLogic.GameIntro();
             GameLogic.MainMenu();
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -45,11 +43,12 @@ namespace Labb3_DarkWoods.Game
         private static void GameIntro()
         {
             MenuVisualText.GameLogo();
-            StoryVisualText.IntroText();
+           // StoryVisualText.IntroText();
             ChoosePlayerAndWeponNames();
+            Tools.GodMode();
+  
         }
-        //===================================================================================================================================================================================
-
+      
 
 
 
@@ -61,7 +60,6 @@ namespace Labb3_DarkWoods.Game
         {
             Console.WriteLine($"Watch out! An ancient {monster.Name} level {monster.Level} is blocking your way\n");
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -74,22 +72,12 @@ namespace Labb3_DarkWoods.Game
         {
             Console.WriteLine("Choose a name for your.... ");
             Console.Write("Hero:");
-            playerOne.Name = Console.ReadLine();
+            playerOne.Name = Console.ReadLine().ToLower();
             Console.Write("Wepon: ");
             playerOne.WeponName = Console.ReadLine();
-            Console.Clear();
+        
 
-            
-
-            if (playerOne.Name == "Robin")
-            {
-                playerOne.Level = 9;
-                playerOne.Toughness = 100;
-                playerOne.Strenght = 100;
-                playerOne.Gold = 1000000;
-            }
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -115,7 +103,7 @@ namespace Labb3_DarkWoods.Game
                         EnterDarkwoods();
                         break;
                     case "2":
-                        Player.Player.PrintPlayerInfo(playerList[0]);
+                        PrintPlayerInfo(playerList[0]);
                         break;
                     case "3":
                         Shop.Shop.ShopCabin();
@@ -129,7 +117,6 @@ namespace Labb3_DarkWoods.Game
 
             } while (keepMenuGo);
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -140,7 +127,6 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void EnterDarkwoods()
         {
-
             bool keepMenuGo = true;
             string menuChoiceString;
            
@@ -167,7 +153,6 @@ namespace Labb3_DarkWoods.Game
 
             } while (keepMenuGo);
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -182,6 +167,7 @@ namespace Labb3_DarkWoods.Game
             int randomMonster = rand.Next(listOfMOnsters.Count);
             bool keepMenuGo;
             string menuChoiceString;
+            
             if(randomFightNoFight <= 8)
             {
                 do
@@ -202,8 +188,8 @@ namespace Labb3_DarkWoods.Game
                         case "2":
                             keepMenuGo = false;
                             break;
-
                     }
+                    
                     Tools.PlayerMOnsterFUllHp(listOfMOnsters[randomMonster]);
                     break;
 
@@ -213,12 +199,11 @@ namespace Labb3_DarkWoods.Game
             }
             else
             {
-                Console.WriteLine("Nothing happens.");
+                Console.WriteLine($" Are you lost? Dont be afraid {playerOne.Name} the monsters aren't real... I think......... ");
+                //StoryVisualText.ExploreDarkWoodText();
                 Console.ReadLine();
-            }
-            
+            }  
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -231,9 +216,9 @@ namespace Labb3_DarkWoods.Game
         {
             do
             {
-                int randomPlayerDmg = rand.Next(1, 50);
+                int randomPlayerDmg = rand.Next(1, 60);
                 playerOne.Dmg = randomPlayerDmg;
-                int randomMonsterDmg = rand.Next(1, 40);
+                int randomMonsterDmg = rand.Next(1, 35);
                 monster.AtkDmg = randomMonsterDmg;
                 int randomMonsterGoldDrop = rand.Next(0, 100);
                 monster.GoldDrop = randomMonsterGoldDrop;
@@ -252,26 +237,5 @@ namespace Labb3_DarkWoods.Game
 
             Battle.DefetedMonsterGains(monster);
         }
-
-       
-        //===================================================================================================================================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
 }

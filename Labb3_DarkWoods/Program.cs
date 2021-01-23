@@ -6,6 +6,7 @@ namespace Labb3_DarkWoods
     {
         static void Main(string[] args)
         {
+         
             GameLogic.NewGame();
         }
     }

@@ -59,10 +59,10 @@ namespace Labb3_DarkWoods.Player
             Tools.GreenTextWr($"{playerOne.Level}");
            
             Console.Write("\nHP: ");
-            Tools.GreenTextWr($" {playerOne.Hp + playerOne.toughness} / {playerOne.FixedHp + playerOne.toughness} ");
+            Tools.GreenTextWr($" {playerOne.Hp + playerOne.Toughness} / {playerOne.FixedHp + playerOne.Toughness} ");
 
             Console.Write("\nEXP: ");
-            Tools.GreenTextWr($"{playerOne.Exp} / {playerOne.expLevelUp}");
+            Tools.GreenTextWr($"{playerOne.Exp} / {playerOne.ExpLevelUp} ( {playerOne.ExpLevelUp - playerOne.Exp} exp left to level {playerOne.Level + 1})");
          
             Console.Write("\nGold: ");
             Tools.GreenTextWr($"{playerOne.Gold}");

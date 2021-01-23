@@ -35,6 +35,48 @@ namespace Labb3_DarkWoods.Utility
 
 
 
+
+
+        public static void PrintSlow(string text, int textSpeed = 20)
+        {
+
+            foreach (char item in text)
+            {
+                Console.Write(item);
+                System.Threading.Thread.Sleep(textSpeed);
+
+            }
+
+
+
+            Console.WriteLine();
+        }
+
+        public static void GodMode()
+        {
+
+            string mrRedBull = "Robin";
+            if (playerOne.Name == mrRedBull.ToLower())
+            {
+                playerOne.Level = 9;
+                playerOne.Toughness = 100;
+                playerOne.Strenght = 100;
+                playerOne.Gold = 1000000;
+                playerOne.ExpLevelUp = 100;
+
+                Console.WriteLine($"\nI've beeen expecting you master {playerOne.Name}\n");
+                Console.WriteLine($"Your player level has been uppgraded to level {playerOne.Level}");
+                Console.WriteLine($"Toughness is at {playerOne.Toughness} and Strenght is also at {playerOne.Strenght}");
+                Console.WriteLine($"Your pocket is hevy with {playerOne.Gold} in it\n");
+                Console.WriteLine($"You are very ready to explore the Darkwoods!");
+            }
+            Console.ReadLine();
+            Console.Clear();
+        }
+
+
+
+
         //===================================================================================================================================================================================
         // Ändrar färg på texten som används som inparameter
         //===================================================================================================================================================================================

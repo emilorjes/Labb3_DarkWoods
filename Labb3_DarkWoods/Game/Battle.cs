@@ -10,6 +10,9 @@ namespace Labb3_DarkWoods.Game
 {
     class Battle
     {
+        //===================================================================================================================================================================================
+        // En metod som tar in alla metoder som styr battle systemet
+        //===================================================================================================================================================================================
         public static void NewBattle(Monster.Monster monster)
         {
             PlayerBattleDmg(monster);
@@ -23,8 +26,10 @@ namespace Labb3_DarkWoods.Game
 
 
 
-        
 
+        //===================================================================================================================================================================================
+        // Skriver ut vilket monster som attackeras och hur mycket Dmg player slår
+        //===================================================================================================================================================================================
         private static void PlayerBattleDmg(Monster.Monster monster)
         {
             Console.Write($"You attack the ");
@@ -39,6 +44,13 @@ namespace Labb3_DarkWoods.Game
             monster.Hp = monster.Hp - playerOne.Dmg - playerOne.Strenght;
         }
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // Skriver ut hur mycket Hp monstret har efter den blivit skadad
+        //===================================================================================================================================================================================
         private static void MonsterBattleHp(Monster.Monster monster)
         {
             if (monster.Hp > 0)
@@ -58,6 +70,12 @@ namespace Labb3_DarkWoods.Game
         }
 
 
+
+
+
+        //===================================================================================================================================================================================
+        // Skriver ut vilket monster som attackerar och hur mycket Dmg monstret slår
+        //===================================================================================================================================================================================
         private static void MonsterBattleDmg(Monster.Monster monster)
         {
             Console.Write($"The ");
@@ -71,6 +89,11 @@ namespace Labb3_DarkWoods.Game
         }
 
 
+
+
+        //===================================================================================================================================================================================
+        // Skriver ut hur mycket Hp player har efter den blivit skadad
+        //===================================================================================================================================================================================
         private static void PlayerBattleHp()
         {
             if (playerOne.Hp > 0)
@@ -90,6 +113,12 @@ namespace Labb3_DarkWoods.Game
         }
 
 
+
+
+
+        //===================================================================================================================================================================================
+        // Beroende på player och monsters Hp skrivs något av dessa if statments ut
+        //===================================================================================================================================================================================
         private static void BattleHitWonLose(Monster.Monster monster)
         {
             if (monster.Hp > 0 && playerOne.Hp > 0)
@@ -113,8 +142,9 @@ namespace Labb3_DarkWoods.Game
 
 
 
-
-
+        //===================================================================================================================================================================================
+        // SKriver ut information om Stats efter att ett monster blivit besegrat.
+        //===================================================================================================================================================================================
         public static void DefetedMonsterGains(Monster.Monster monster)
         {
             if (monster.Hp <= 0)
@@ -137,11 +167,38 @@ namespace Labb3_DarkWoods.Game
                 {
                     playerOne.Exp = default;
                     playerOne.Level += 1;
+                    monster.Level += 1;
                     playerOne.ExpLevelUp += 100;
                     Console.WriteLine($"\nNice! You are level {playerOne.Level} now.");
+
                     if (playerOne.Level == 10)
                     {
-                        Console.WriteLine("\nYOU WON THE GAME!\n");
+                        Console.WriteLine("You killed all the monsters that guarded the ancient Mine that contains The Ark");
+                        Console.Write("Enter the password to open the Doors of Durin to optain The Ark: ");
+                        
+                        string minePassword = "Mellon";
+                        string durinPassword = Console.ReadLine().ToLower();
+                     
+                        if (durinPassword == minePassword.ToLower())
+                        {
+                            Tools.GreenTextWr("\nYOU WON THE GAME!\n");
+                           
+                        }
+                        else
+                        {
+                            while (durinPassword != minePassword.ToLower())
+                            {
+                                Console.Write("Nothing happens, try again.....Password: ");
+                                durinPassword = Console.ReadLine().ToLower();
+                            }
+                            Tools.GreenTextWr("\nYOU WON THE GAME!\n");
+                            
+                        }
+
+
+
+                        Console.ReadLine();
+                        Console.Clear();
                         Tools.Exit();
                     }
                 }
@@ -150,13 +207,13 @@ namespace Labb3_DarkWoods.Game
             }
         }
 
-       
 
-        
 
-        
-       
 
-       
+
+
+
+
+
     }
 }
