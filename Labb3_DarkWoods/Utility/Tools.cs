@@ -55,14 +55,14 @@ namespace Labb3_DarkWoods.Utility
         public static void GodMode()
         {
 
-            string mrRedBull = "Robin";
-            if (playerOne.Name == mrRedBull.ToLower())
+            
+            if (playerOne.Name == "Robin" || playerOne.Name == "robin")
             {
                 playerOne.Level = 9;
                 playerOne.Toughness = 100;
                 playerOne.Strenght = 100;
                 playerOne.Gold = 1000000;
-                playerOne.ExpLevelUp = 100;
+                playerOne.ExpLevelUp = 300;
 
                 Console.WriteLine($"\nI've beeen expecting you master {playerOne.Name}\n");
                 Console.WriteLine($"Your player level has been uppgraded to level {playerOne.Level}");

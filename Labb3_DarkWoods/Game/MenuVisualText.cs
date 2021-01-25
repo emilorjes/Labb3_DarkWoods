@@ -28,8 +28,8 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         public static void CabinShopMenuText()
         {
-            Console.WriteLine("Welcom to The Cabin Store, what can i help you with traveller?\n");
-            Console.Write($"Current Gold ammount: ");
+            StoryVisualText.EnterCabinShopText();
+            Console.Write($"\nCurrent Gold ammount: ");
             Tools.YellowTextWr($"{playerOne.Gold} \n");
 
             Console.Write($"1.  Buy Strenght Amulette: ");

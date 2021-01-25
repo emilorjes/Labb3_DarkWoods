@@ -9,19 +9,20 @@ using Labb3_DarkWoods.Monster;
 
 namespace Labb3_DarkWoods.Game
 {
+    
     class GameLogic
-    {
-        
+    { 
         //===================================================================================================================================================================================
-        // Public lista med player och monster. Public random som andvänds för alla random
+        // Public lista med player och monster. Public random som andvänds för alla random i denna klass
         //===================================================================================================================================================================================
         public static List<Monster.Monster> listOfMOnsters = new List<Monster.Monster>()
         {CreekJumper.creekJumper, DeathRunner.deathRunner, EarthCrawler.earthCrawler, SwampDemon.swampDemon, TreeDropper.treeDropper};
         public static List<Player.Player> playerList = new List<Player.Player> {playerOne};
-        public static Random rand = new Random();
-        
+        public static Random random = new Random();
 
-        
+
+
+
 
 
         //===================================================================================================================================================================================
@@ -72,7 +73,7 @@ namespace Labb3_DarkWoods.Game
         {
             Console.WriteLine("Choose a name for your.... ");
             Console.Write("Hero:");
-            playerOne.Name = Console.ReadLine().ToLower();
+            playerOne.Name = Console.ReadLine();
             Console.Write("Wepon: ");
             playerOne.WeponName = Console.ReadLine();
         
@@ -163,8 +164,8 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void ExploreDarkwoods()
         {
-            int randomFightNoFight = rand.Next(1,12);
-            int randomMonster = rand.Next(listOfMOnsters.Count);
+            int randomFightNoFight = random.Next(1,12);
+            int randomMonster = random.Next(listOfMOnsters.Count);
             bool keepMenuGo;
             string menuChoiceString;
             
@@ -199,8 +200,7 @@ namespace Labb3_DarkWoods.Game
             }
             else
             {
-                Console.WriteLine($" Are you lost? Dont be afraid {playerOne.Name} the monsters aren't real... I think......... ");
-                //StoryVisualText.ExploreDarkWoodText();
+                StoryVisualText.ExploreDarkWoodText();
                 Console.ReadLine();
             }  
         }
@@ -216,12 +216,7 @@ namespace Labb3_DarkWoods.Game
         {
             do
             {
-                int randomPlayerDmg = rand.Next(1, 60);
-                playerOne.Dmg = randomPlayerDmg;
-                int randomMonsterDmg = rand.Next(1, 35);
-                monster.AtkDmg = randomMonsterDmg;
-                int randomMonsterGoldDrop = rand.Next(0, 100);
-                monster.GoldDrop = randomMonsterGoldDrop;
+                Battle.MonsterRandomDmgAndGoldDrop(monster);
 
                 if (monster.Hp == 0)
                 {
@@ -229,7 +224,7 @@ namespace Labb3_DarkWoods.Game
                 }
 
                 Battle.NewBattle(monster);
-                
+
                 Console.ReadLine();
 
                 Console.Clear();
@@ -237,5 +232,8 @@ namespace Labb3_DarkWoods.Game
 
             Battle.DefetedMonsterGains(monster);
         }
+
+       
+        
     }
 }

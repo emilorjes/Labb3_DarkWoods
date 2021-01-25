@@ -1,6 +1,7 @@
 ﻿using Labb3_DarkWoods.Utility;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using static Labb3_DarkWoods.Player.Player;
 
@@ -8,7 +9,7 @@ namespace Labb3_DarkWoods.Game
 {
     class StoryVisualText
     {
-        public static Random randText = new Random();
+        public static Random rand = new Random();
 
        
         public static void IntroText()
@@ -22,26 +23,53 @@ namespace Labb3_DarkWoods.Game
 
 
 
+
+        public static void EndingText()
+        {
+            Tools.PrintSlow($"The ground begins to shake and the doors, which have not been" +
+                                $" opened for hundreds of years, open up a path into the forgotten mine......... And ther it is" +
+                                $"....... The Ark");
+            Console.WriteLine("\nPress [ENTER] to use The Ark on the Origin tree and save the world....");
+            Console.ReadLine();
+            Tools.GreenTextWr("\nYOU WON THE GAME!\n");
+        }
+
+
+
+
         public static void ExploreDarkWoodText()
         {
-            
-            List<string> randomStoryText = new List<string>();
-            randomStoryText.Add("It is something that is terrible wrong with this forest......");
-            randomStoryText.Add("Maybe it's best if you just sit down and die.......");
-            randomStoryText.Add("This is a dead end...");
-            randomStoryText.Add($" Are you lost? Dont be afraid {playerOne.Name} the monsters aren't real... I think......... ");
-            randomStoryText.Add("Afterall it could have been worse...");
+            string[] noBattleText = new string[6];
+            noBattleText[0] = ("It is something that is terrible wrong with this forest......");
+            noBattleText[1] = ("Maybe it's best if you just sit down and give up.........");
+            noBattleText[2]= ("This is a dead end...");
+            noBattleText[3] = ($" Are you lost? Dont be afraid {playerOne.Name} the monsters aren't real... I think......... ");
+            noBattleText[4] = ("Afterall it could have been worse...");
+            noBattleText[5] = ("Rumor says that The Ark is hidden in an ancient mine.");
 
-            int index = randText.Next(randomStoryText.Count);
-            string randomStory = randomStoryText[index];
-            foreach (var item in randomStory)
-            {
-                Console.WriteLine(item);
-            }
-            
+            int randomStoryText = rand.Next(noBattleText.Length);
+
+            Console.WriteLine(noBattleText[randomStoryText]);
            
+        }
+
+
+
+        public static void EnterCabinShopText()
+        {
+            string[] enterShopText = new string[5];
+            enterShopText[0] = ("Greetings my friend, how can i help you?");
+            enterShopText[1] = ($"Nice to have you back {playerOne.Name}");
+            enterShopText[2] = ("The Darkwwods is a dangerous place, spend som money in my shop to make it less dangerous");
+            enterShopText[3] = ($" Hi {playerOne.Name} you are alredy back!? ");
+            enterShopText[4] = ($"When i was at your age {playerOne.Name} i hade a teacher named Kakashi who taught" +
+                $" me everything i needed to know to create this store");
+
+            int randomStoryText = rand.Next(enterShopText.Length);
             
+            Console.WriteLine(enterShopText[randomStoryText]);
 
         }
+
     }
 }
