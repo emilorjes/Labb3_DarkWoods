@@ -11,20 +11,26 @@ namespace Labb3_DarkWoods.Game
 {
     class Battle
     {
+        //===================================================================================================================================================================================
+        // En random som används i denna klass
+        //===================================================================================================================================================================================
         public static Random rand = new Random();
 
+
+
+
+
         //===================================================================================================================================================================================
-        // En metod som tar in alla metoder som styr battle systemet
+        // En metod som tar in metoder som styr battle systemet
         //===================================================================================================================================================================================
         public static void NewBattle(Monster.Monster monster)
         {
-            PlayerBattleDmg(monster);
-            MonsterBattleHp(monster);
-            MonsterBattleDmg(monster);
-            PlayerBattleHp();
-            BattleHitWonLose(monster);
+            PlayerBattleDmg(monster); // Skriver ut vilket monster som attackeras och hur mycket Dmg player slår
+            MonsterBattleHp(monster); // Skriver ut hur mycket Hp monstret har efter den blivit skadad
+            MonsterBattleDmg(monster); // Skriver ut vilket monster som attackerar och hur mycket Dmg monstret slår
+            PlayerBattleHp(); // Skriver ut hur mycket Hp player har efter den blivit skadad
+            BattleHitWonLose(monster); // Beroende på player och monsters Hp skrivs något av dessa if statments ut
         }
-
 
 
 
@@ -81,7 +87,7 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void MonsterBattleDmg(Monster.Monster monster)
         {
-            if(monster.Hp > 0)
+            if (monster.Hp > 0)
             {
                 Console.Write($"The ");
                 Tools.MagnetaTextW($"{monster.Name} ");
@@ -92,16 +98,15 @@ namespace Labb3_DarkWoods.Game
                 Console.WriteLine("damage.");
                 playerOne.Hp -= monster.AtkDmg;
             }
-            else if(monster.Hp <= 0)
+            else if (monster.Hp <= 0)
             {
                 Console.Write($"The ");
                 Tools.MagnetaTextW($"{monster.Name} ");
                 Console.Write("died before it could hit you. ");
-               
+
             }
-           
-            
         }
+
 
 
 
@@ -158,7 +163,7 @@ namespace Labb3_DarkWoods.Game
 
 
         //===================================================================================================================================================================================
-        // SKriver ut information om Stats efter att ett monster blivit besegrat.
+        // Skriver ut information och Stats efter att ett monster blivit besegrat.
         //===================================================================================================================================================================================
         public static void DefetedMonsterGains(Monster.Monster monster)
         {
@@ -185,27 +190,34 @@ namespace Labb3_DarkWoods.Game
                     monster.Level = playerOne.Level;
                     playerOne.ExpLevelUp += 100;
                     Console.WriteLine($"\nNice! You are level {playerOne.Level} now.");
-                    Console.ReadLine();
-                    LevelTen();
+                    LevelTen(); // När level 10 är uppnåt måste användaren skriva in ett lösenord för att kunna fortsätta
                 }
 
                 Console.ReadLine();
             }
         }
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // När level 10 är uppnåt måste användaren skriva in ett lösenord för att kunna fortsätta
+        //===================================================================================================================================================================================
         private static void LevelTen()
         {
             if (playerOne.Level == 10)
             {
                 Console.Clear();
                 Console.WriteLine("You killed all the monsters that guarded the ancient Mine that contains The Ark");
-                Console.Write("Enter the password to open the Doors of Durin: ");
+                Console.Write("Enter the password my to open the Doors of Durin: ");
 
                 string minePassword = "Mellon";
                 string durinPassword = Console.ReadLine().ToLower();
 
                 if (durinPassword == minePassword.ToLower())
                 {
+
                     StoryVisualText.EndingText();
 
                 }
@@ -213,28 +225,32 @@ namespace Labb3_DarkWoods.Game
                 {
                     while (durinPassword != minePassword.ToLower())
                     {
-                        Console.Write("Nothing happens, try again.....Password: ");
+                        Console.Clear();
+                        Tools.RedTextWr("Wrong Password....\n");
+                        StoryVisualText.SecretPasswordHints(); // En array med ledtrådar till secretPassword som skrivs ut random
+                        Console.Write("Password: ");
                         durinPassword = Console.ReadLine().ToLower();
                     }
-                    Tools.GreenTextWr("\nYOU WON THE GAME!\n");
+                    StoryVisualText.EndingText(); // Skriver ut endingtext med hjälp av metoden PrintSlow
 
                 }
 
-
-
                 Console.ReadLine();
                 Console.Clear();
-                Tools.Exit();
+                Tools.Exit(); // Stänger ner spelet
             }
         }
 
 
 
 
+
+        //===================================================================================================================================================================================
+        // Beroende på vilken level monster är på ändras monstrets randomDmg  max skada, random guld droppas av monstret
+        //===================================================================================================================================================================================
         public static void MonsterRandomDmgAndGoldDrop(Monster.Monster monster)
         {
-            int randomPlayerDmg = rand.Next(1, 60);
-            playerOne.Dmg = randomPlayerDmg;
+          
             int randomMonsterDmg;
             if (monster.Level == 1)
             {
@@ -289,15 +305,6 @@ namespace Labb3_DarkWoods.Game
 
             int randomMonsterGoldDrop = rand.Next(0, 100);
             monster.GoldDrop = randomMonsterGoldDrop;
-
-
-
-
-
-
-
-
-
-        }   
+        }
     }
 }

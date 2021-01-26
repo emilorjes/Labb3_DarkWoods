@@ -9,18 +9,35 @@ namespace Labb3_DarkWoods.Shop
 {
     class Shop
     {
+        //===================================================================================================================================================================================
+        // Fields
+        //===================================================================================================================================================================================
         private int addStrenght;
         private int addToughness;
         private int strenghtPrice;
         private int toughnessPrice;
         private int zeroGold;
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // Property
+        //===================================================================================================================================================================================
         public int AddStrenght { get => addStrenght; set => addStrenght = value; }
         public int AddToughness { get => addToughness; set => addToughness = value; }
         public int StrenghtPrice { get => strenghtPrice; set => strenghtPrice = value; }
         public int ToughnessPrice { get => toughnessPrice; set => toughnessPrice = value; }
         public int ZeroGold { get => zeroGold; set => zeroGold = value; }
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // Constructor
+        //===================================================================================================================================================================================
         public Shop(int addStrenght, int addToughness, int strenghtPrice, int toughnessPrice, int zeroGold)
         {
             this.AddStrenght = addStrenght;
@@ -30,6 +47,13 @@ namespace Labb3_DarkWoods.Shop
             this.ZeroGold = zeroGold;
         }
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // Nytt objekt skapas
+        //===================================================================================================================================================================================
         public static Shop cabinShop = new Shop(5, 5, 50, 50, default);
 
 
@@ -42,21 +66,21 @@ namespace Labb3_DarkWoods.Shop
         public static void ShopCabin()
         {
             bool keepMenuGo = true;
-
+            StoryVisualText.EnterCabinShopText(); // En array med meddelande som skrivs ut random när man besöker butiken (CabinShop)
             do
             {
-                MenuVisualText.CabinShopMenuText();
+                MenuVisualText.CabinShopMenuText(); // Skriver ut text till CabinShop meny
 
                 string menuChoiceString = Console.ReadLine();
-                ErrorHandling.ThreeChoiceMenuHandling(menuChoiceString);
+                ErrorHandling.ThreeChoiceMenuHandling(menuChoiceString); // Felhanterar en meny som har tre stycken menyval
 
                 switch (menuChoiceString)
                 {
                     case "1":
-                        BuyStrenght();
+                        BuyStrenght(); // Köper Strenght och lägger till den till player
                         break;
                     case "2":
-                        BuyToughness();
+                        BuyToughness(); //  Köper Toughness och lägger till den till player
                         break;
                     case "3":
                         keepMenuGo = false;
@@ -66,7 +90,6 @@ namespace Labb3_DarkWoods.Shop
 
             } while (keepMenuGo);
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -79,18 +102,17 @@ namespace Labb3_DarkWoods.Shop
         {
             if (playerOne.Gold < cabinShop.StrenghtPrice || playerOne.Gold <= cabinShop.ZeroGold)
             {
-                NotEnoughMoney();
+                NotEnoughMoney(); // Skriver ut ett meddelande om player har för lite pengar
             }
             else
             {
                 playerOne.Strenght += cabinShop.AddStrenght;
                 playerOne.Gold -= cabinShop.StrenghtPrice;
-                
+
                 Tools.GreenTextWr($"\nYou added {cabinShop.AddStrenght} points to your Toughness! Your toughness is now {playerOne.Strenght}. ");
             }
             Console.ReadLine();
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -103,7 +125,7 @@ namespace Labb3_DarkWoods.Shop
         {
             if (playerOne.Gold < cabinShop.ToughnessPrice || playerOne.Gold <= cabinShop.ZeroGold)
             {
-                NotEnoughMoney();
+                NotEnoughMoney(); // Skriver ut ett meddelande om player har för lite pengar
             }
             else
             {
@@ -114,7 +136,6 @@ namespace Labb3_DarkWoods.Shop
             }
             Console.ReadLine();
         }
-        //===================================================================================================================================================================================
 
 
 
@@ -129,6 +150,5 @@ namespace Labb3_DarkWoods.Shop
             Console.Write($"Current Gold: ");
             Tools.YellowTextWr($"{playerOne.Gold}");
         }
-        //===================================================================================================================================================================================
     }
 }

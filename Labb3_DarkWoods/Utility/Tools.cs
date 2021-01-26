@@ -15,31 +15,28 @@ namespace Labb3_DarkWoods.Utility
             Console.Write("The Darkwoods awiats you......\n\n\n");
             Environment.Exit(0);
         }
-        //===================================================================================================================================================================================
 
 
 
 
 
         //===================================================================================================================================================================================
-        // Återställer full Hp
+        // Återställer full Hp för player och monster
         //===================================================================================================================================================================================
-        public static void PlayerMOnsterFUllHp(Monster.Monster monster)
+        public static void PlayerMOnsterFullHp(Monster.Monster monster)
         {
             playerOne.Hp = 100;
             monster.Hp = monster.MaxHp;
         }
+
+
+
+
         //===================================================================================================================================================================================
-
-
-
-
-
-
-
+        // Skriver ut texten "sakta" som matas in i metoden
+        //===================================================================================================================================================================================
         public static void PrintSlow(string text, int textSpeed = 20)
         {
-
             foreach (char item in text)
             {
                 Console.Write(item);
@@ -47,15 +44,18 @@ namespace Labb3_DarkWoods.Utility
 
             }
 
-
-
             Console.WriteLine();
         }
 
+
+
+
+
+        //===================================================================================================================================================================================
+        // Om Robin/robin Skrivs in ändras playerstatsen till användarens fördel.
+        //===================================================================================================================================================================================
         public static void GodMode()
         {
-
-            
             if (playerOne.Name == "Robin" || playerOne.Name == "robin")
             {
                 playerOne.Level = 9;
@@ -70,9 +70,11 @@ namespace Labb3_DarkWoods.Utility
                 Console.WriteLine($"Your pocket is hevy with {playerOne.Gold} in it\n");
                 Console.WriteLine($"You are very ready to explore the Darkwoods!");
             }
+
             Console.ReadLine();
             Console.Clear();
         }
+
 
 
 
@@ -86,61 +88,68 @@ namespace Labb3_DarkWoods.Utility
             Console.WriteLine(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void RedTextW(string input)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void GreenTextWr(string input)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void YellowTextWr(string input)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void DarkYellowTextWr(string input)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void DarkYellowTextW(string input)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void BlueTextWr(string input)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void BlueTextW(string input)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void MagnetaTextWr(string input)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(input);
             Console.ResetColor();
         }
+        //===================================================================================================================================================================================
         public static void MagnetaTextW(string input)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write(input);
             Console.ResetColor();
         }
-
-        //===================================================================================================================================================================================
     }
 }

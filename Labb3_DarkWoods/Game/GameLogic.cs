@@ -9,18 +9,17 @@ using Labb3_DarkWoods.Monster;
 
 namespace Labb3_DarkWoods.Game
 {
-    
+
     class GameLogic
-    { 
+    {
         //===================================================================================================================================================================================
-        // Public lista med player och monster. Public random som andvänds för alla random i denna klass
+        // Public lista med player och monster. Random som andvänds för alla random i denna klass, public bool för menyerna, public string för felhantering
         //===================================================================================================================================================================================
         public static List<Monster.Monster> listOfMOnsters = new List<Monster.Monster>()
         {CreekJumper.creekJumper, DeathRunner.deathRunner, EarthCrawler.earthCrawler, SwampDemon.swampDemon, TreeDropper.treeDropper};
-        public static List<Player.Player> playerList = new List<Player.Player> {playerOne};
+        public static List<Player.Player> playerList = new List<Player.Player> { playerOne };
         public static Random random = new Random();
-
-
+        public static string menuChoice;
 
 
 
@@ -30,8 +29,8 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         public static void NewGame()
         {
-            GameLogic.GameIntro();
-            GameLogic.MainMenu();
+            GameLogic.GameIntro(); // Spelets namn och en historia visas upp och använderen får välja namn på player och wepon
+            GameLogic.MainMenu(); // Huvudmeny med olika alternativ
         }
 
 
@@ -39,17 +38,16 @@ namespace Labb3_DarkWoods.Game
 
 
         //===================================================================================================================================================================================
-        // Spelets namn och en historia visas upp och använderen får välja namn på player och wepon.
+        // Spelets namn och en historia visas upp och använderen får välja namn på player och wepon
         //===================================================================================================================================================================================
         private static void GameIntro()
         {
-            MenuVisualText.GameLogo();
-           // StoryVisualText.IntroText();
-            ChoosePlayerAndWeponNames();
-            Tools.GodMode();
-  
+            MenuVisualText.GameLogo(); // En "logo" till spelet
+            //StoryVisualText.IntroText(); // Skriver ut en introtext med hjälp av metoden PrintSlow
+            ChoosePlayerAndWeponNames(); // Spelaren får välja namn på player och wepon
+            Tools.GodMode(); // Om Robin/robin Skrivs in ändras playerstatsen till användarens fördel.
         }
-      
+
 
 
 
@@ -76,8 +74,6 @@ namespace Labb3_DarkWoods.Game
             playerOne.Name = Console.ReadLine();
             Console.Write("Wepon: ");
             playerOne.WeponName = Console.ReadLine();
-        
-
         }
 
 
@@ -85,32 +81,32 @@ namespace Labb3_DarkWoods.Game
 
 
         //===================================================================================================================================================================================
-        // Huvudmeny
+        // Huvudmeny med olika alternativ
         //===================================================================================================================================================================================
         private static void MainMenu()
         {
             bool keepMenuGo = true;
             do
             {
-                MenuVisualText.MainMenuText();
-                string menuChoiceString = Console.ReadLine();
-                ErrorHandling.FourChoiceMenuHandling(menuChoiceString);
+                MenuVisualText.MainMenuText(); // Skriver ut text till MainMenu meny
+                menuChoice = Console.ReadLine();
+                ErrorHandling.FourChoiceMenuHandling(menuChoice); // Felhanterar en meny som har fyra stycken menyval
 
                 Console.Clear();
 
-                switch (menuChoiceString)
+                switch (menuChoice)
                 {
                     case "1":
-                        EnterDarkwoods();
+                        EnterDarkwoods(); //  Gå in i Darkwoods
                         break;
                     case "2":
-                        PrintPlayerInfo(playerList[0]);
+                        PrintPlayerInfo(playerList[0]); // Skriver ut alla stats på player
                         break;
                     case "3":
-                        Shop.Shop.ShopCabin();
+                        Shop.Shop.ShopCabin(); // En shop där man kan köpa Strenght och Toughness till sin player
                         break;
                     case "4":
-                        Tools.Exit();
+                        Tools.Exit(); // Stänger ner spelet
                         break;
                 }
 
@@ -129,21 +125,19 @@ namespace Labb3_DarkWoods.Game
         private static void EnterDarkwoods()
         {
             bool keepMenuGo = true;
-            string menuChoiceString;
-           
             do
             {
-                MenuVisualText.EnterDarkwoodsMenuText();
-                menuChoiceString = Console.ReadLine();
+                MenuVisualText.EnterDarkwoodsMenuText(); // Skriver ut text till EnterDarkwoods meny
+                menuChoice = Console.ReadLine();
 
-                ErrorHandling.TwoChoiceMenuHandling(menuChoiceString);
+                ErrorHandling.TwoChoiceMenuHandling(menuChoice); // Felhanterar en meny som har två stycken menyval
 
                 Console.Clear();
 
-                switch (menuChoiceString)
+                switch (menuChoice)
                 {
                     case "1":
-                        ExploreDarkwoods();
+                        ExploreDarkwoods(); // Utforska Darkwoods, välj om du vill attackera eller fly, om inget monster dyker upp skrivs ett meddalande ut
                         break;
                     case "2":
                         keepMenuGo = false;
@@ -160,49 +154,46 @@ namespace Labb3_DarkWoods.Game
 
 
         //===================================================================================================================================================================================
-        // Utforska Darkwoods, välj om du vill attackera eller fly
+        // Utforska Darkwoods, välj om du vill attackera eller fly, om inget monster dyker upp skrivs ett meddalande ut
         //===================================================================================================================================================================================
         private static void ExploreDarkwoods()
         {
-            int randomFightNoFight = random.Next(1,12);
+            bool keepMenuGo = true;
+            int randomFightNoFight = random.Next(1, 12);
             int randomMonster = random.Next(listOfMOnsters.Count);
-            bool keepMenuGo;
-            string menuChoiceString;
-            
-            if(randomFightNoFight <= 8)
+
+            if (randomFightNoFight <= 8)
             {
                 do
                 {
-                    MonsterAppear(listOfMOnsters[randomMonster]);
-                    MenuVisualText.ExploreDarkwoodsMenuText();
-                    menuChoiceString = Console.ReadLine();
+                    MonsterAppear(listOfMOnsters[randomMonster]); //  Skriver ut ett random monster
+                    MenuVisualText.ExploreDarkwoodsMenuText(); // Skriver ut text till ExploreDarkwoods meny
+                    menuChoice = Console.ReadLine();
 
-                    ErrorHandling.TwoChoiceMenuHandling(menuChoiceString);
+                    ErrorHandling.TwoChoiceMenuHandling(menuChoice);  // Felhanterar en meny som har två stycken menyval
 
                     Console.Clear();
 
-                    switch (menuChoiceString)
+                    switch (menuChoice)
                     {
                         case "1":
-                            PlayerVsMonster(listOfMOnsters[randomMonster]);
+                            PlayerVsMonster(listOfMOnsters[randomMonster]); // Styr hela flödet av battlesystemet
                             break;
                         case "2":
                             keepMenuGo = false;
                             break;
                     }
-                    
-                    Tools.PlayerMOnsterFUllHp(listOfMOnsters[randomMonster]);
+
+                    Tools.PlayerMOnsterFullHp(listOfMOnsters[randomMonster]); // Återställer full Hp för player och monster
                     break;
-
-
 
                 } while (keepMenuGo);
             }
             else
             {
-                StoryVisualText.ExploreDarkWoodText();
+                StoryVisualText.ExploreDarkWoodText(); // En array med meddelande som skrivs ut random när man inte möter ett monster
                 Console.ReadLine();
-            }  
+            }
         }
 
 
@@ -210,30 +201,30 @@ namespace Labb3_DarkWoods.Game
 
 
         //===================================================================================================================================================================================
-        // Battlesystem
+        // Styr hela flödet av battlesystemet
         //===================================================================================================================================================================================
         private static void PlayerVsMonster(Monster.Monster monster)
         {
             do
             {
-                Battle.MonsterRandomDmgAndGoldDrop(monster);
+                int randomPlayerDmg = random.Next(1, 60); // Sätter playerDmg till random
+                playerOne.Dmg = randomPlayerDmg;
+                Battle.MonsterRandomDmgAndGoldDrop(monster); // Beroende på vilken level monster är på ändras monstrets randomDmg  max skada, random guld droppas av monstret
 
                 if (monster.Hp == 0)
                 {
                     break;
                 }
 
-                Battle.NewBattle(monster);
+                Battle.NewBattle(monster); // En metod som tar in metoder som styr battle systemet
 
                 Console.ReadLine();
 
                 Console.Clear();
             } while (monster.Hp > 0);
 
-            Battle.DefetedMonsterGains(monster);
+            Battle.DefetedMonsterGains(monster); //  Skriver ut information och Stats efter att ett monster blivit besegrat.
+            
         }
-
-       
-        
     }
 }
