@@ -24,13 +24,14 @@ namespace Labb3_DarkWoods.Game
 
 
 
+
         //===================================================================================================================================================================================
         // Startar upp ett nytt game
         //===================================================================================================================================================================================
         public static void NewGame()
         {
-            GameLogic.GameIntro(); // Spelets namn och en historia visas upp och använderen får välja namn på player och wepon
-            GameLogic.MainMenu(); // Huvudmeny med olika alternativ
+            GameIntro(); // Spelets namn och en historia visas upp och använderen får välja namn på player och wepon
+            MainMenu(); // Huvudmeny med olika alternativ
         }
 
 
@@ -46,6 +47,7 @@ namespace Labb3_DarkWoods.Game
             //StoryVisualText.IntroText(); // Skriver ut en introtext med hjälp av metoden PrintSlow
             ChoosePlayerAndWeponNames(); // Spelaren får välja namn på player och wepon
             Tools.GodMode(); // Om Robin/robin Skrivs in ändras playerstatsen till användarens fördel.
+            Console.Clear();
         }
 
 
@@ -158,12 +160,12 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         private static void ExploreDarkwoods()
         {
-            bool keepMenuGo = true;
             int randomFightNoFight = random.Next(1, 12);
             int randomMonster = random.Next(listOfMOnsters.Count);
 
             if (randomFightNoFight <= 8)
             {
+                bool keepMenuGo;
                 do
                 {
                     MonsterAppear(listOfMOnsters[randomMonster]); //  Skriver ut ett random monster
@@ -224,7 +226,7 @@ namespace Labb3_DarkWoods.Game
             } while (monster.Hp > 0);
 
             Battle.DefetedMonsterGains(monster); //  Skriver ut information och Stats efter att ett monster blivit besegrat.
-            
+
         }
     }
 }

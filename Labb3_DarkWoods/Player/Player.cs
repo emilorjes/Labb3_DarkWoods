@@ -82,31 +82,34 @@ namespace Labb3_DarkWoods.Player
         //===================================================================================================================================================================================
         public static void PrintPlayerInfo(Player playerOne)
         {
-            
+            Tools.DarkYellowTextWr("=======================================================");
+
             Console.Write("Name: ");
             Tools.GreenTextWr($"{playerOne.Name}");
-         
+
             Console.Write("\nLevel: ");
             Tools.GreenTextWr($"{playerOne.Level}");
-           
+
             Console.Write("\nHP: ");
             Tools.GreenTextWr($" {playerOne.Hp + playerOne.Toughness} / {playerOne.FixedHp + playerOne.Toughness} ");
 
             Console.Write("\nEXP: ");
             Tools.GreenTextWr($"{playerOne.Exp} / {playerOne.ExpLevelUp} ( {playerOne.ExpLevelUp - playerOne.Exp} exp left to level {playerOne.Level + 1})");
-         
+
             Console.Write("\nGold: ");
             Tools.GreenTextWr($"{playerOne.Gold}");
-       
+
             Console.Write("\nStrength: ");
             Tools.GreenTextWr($"+ {playerOne.Strenght}");
 
             Console.Write("\nToughness: ");
             Tools.GreenTextWr($"+ {playerOne.Toughness}");
-       
+
             Console.Write("\nWepon name: ");
             Tools.GreenTextWr($"{playerOne.WeponName}");
-           
+
+            Tools.DarkYellowTextWr("=======================================================");
+
             Console.ReadLine();
         }
     }

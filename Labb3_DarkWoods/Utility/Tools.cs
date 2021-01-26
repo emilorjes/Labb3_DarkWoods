@@ -69,10 +69,8 @@ namespace Labb3_DarkWoods.Utility
                 Console.WriteLine($"Toughness is at {playerOne.Toughness} and Strenght is also at {playerOne.Strenght}");
                 Console.WriteLine($"Your pocket is hevy with {playerOne.Gold} in it\n");
                 Console.WriteLine($"You are very ready to explore the Darkwoods!");
+                Console.ReadLine();
             }
-
-            Console.ReadLine();
-            Console.Clear();
         }
 
 

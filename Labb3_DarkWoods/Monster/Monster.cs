@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Labb3_DarkWoods.Interface;
 
 namespace Labb3_DarkWoods.Monster
 {
-    class Monster
+    class Monster: IMonster
     {
         //===================================================================================================================================================================================
         // Fields

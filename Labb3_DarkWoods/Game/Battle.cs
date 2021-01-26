@@ -25,10 +25,14 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         public static void NewBattle(Monster.Monster monster)
         {
+            Tools.DarkYellowTextWr("=========================================================================");
             PlayerBattleDmg(monster); // Skriver ut vilket monster som attackeras och hur mycket Dmg player slår
             MonsterBattleHp(monster); // Skriver ut hur mycket Hp monstret har efter den blivit skadad
+            Tools.DarkYellowTextWr("=========================================================================\n\n");
+            Tools.DarkYellowTextWr("=========================================================================");
             MonsterBattleDmg(monster); // Skriver ut vilket monster som attackerar och hur mycket Dmg monstret slår
             PlayerBattleHp(); // Skriver ut hur mycket Hp player har efter den blivit skadad
+            Tools.DarkYellowTextWr("=========================================================================\n");
             BattleHitWonLose(monster); // Beroende på player och monsters Hp skrivs något av dessa if statments ut
         }
 
@@ -67,14 +71,14 @@ namespace Labb3_DarkWoods.Game
                 Console.Write($"The {monster.Name} life is ");
                 Tools.RedTextW($"{monster.Hp} ");
                 Console.Write("/");
-                Tools.GreenTextWr($" {monster.MaxHp}.\n\n");
+                Tools.GreenTextWr($" {monster.MaxHp}.");
             }
             else if (monster.Hp <= 0)
             {
                 Console.Write($"The {monster.Name} life is ");
                 Tools.RedTextW($"0 ");
                 Console.Write("/");
-                Tools.GreenTextWr($" {monster.MaxHp}.\n\n");
+                Tools.GreenTextWr($" {monster.MaxHp}.");
             }
         }
 
@@ -121,14 +125,14 @@ namespace Labb3_DarkWoods.Game
                 Console.Write($"Your life is ");
                 Tools.RedTextW($"{playerOne.Hp + playerOne.Toughness} ");
                 Console.Write("/");
-                Tools.GreenTextWr($" {playerOne.FixedHp + playerOne.Toughness} \n");
+                Tools.GreenTextWr($" {playerOne.FixedHp + playerOne.Toughness}");
             }
             else if (playerOne.Hp <= 0)
             {
                 Console.Write($"Your life is ");
                 Tools.RedTextW($"0 ");
                 Console.Write("/");
-                Tools.GreenTextWr($" {playerOne.FixedHp + playerOne.Toughness} \n");
+                Tools.GreenTextWr($" {playerOne.FixedHp + playerOne.Toughness}");
             }
         }
 
@@ -143,7 +147,7 @@ namespace Labb3_DarkWoods.Game
         {
             if (monster.Hp > 0 && playerOne.Hp > 0)
             {
-                Console.WriteLine("Press ENTER to hit again!");
+                Console.Write("Press ENTER to hit again!     HIT: ");
             }
             else if (monster.Hp <= 0 && playerOne.Hp > 0)
             {
@@ -250,7 +254,7 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         public static void MonsterRandomDmgAndGoldDrop(Monster.Monster monster)
         {
-          
+
             int randomMonsterDmg;
             if (monster.Level == 1)
             {

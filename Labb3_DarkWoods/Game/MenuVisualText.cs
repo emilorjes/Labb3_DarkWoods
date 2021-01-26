@@ -27,7 +27,7 @@ namespace Labb3_DarkWoods.Game
         //===================================================================================================================================================================================
         public static void CabinShopMenuText()
         {
-           
+
             Console.Write($"\nCurrent Gold ammount: ");
             Tools.YellowTextWr($"{playerOne.Gold} \n");
 
@@ -37,12 +37,12 @@ namespace Labb3_DarkWoods.Game
 
             Console.Write($"2.  Buy Toughness Amulette: ");
             Tools.YellowTextWr($"{cabinShop.ToughnessPrice} Gold.");
-            
+
             Console.WriteLine($"3.  Leave the shop");
             Tools.DarkYellowTextWr("=====================================\n");
             Console.Write("Your choice: ");
         }
-
+        
 
 
 
